@@ -1,0 +1,248 @@
+---
+# IMPORTANT: Change settings here, but DO NOT change the spacing.
+# Remove comments and add values where applicable.
+# The descriptions below should be self-explanatory
+
+title: "The Church as a Lending Institution in the Cape Colony 1670 - 1710"
+#subtitle: "This will appear as Right Header"
+
+documentclass: "elsarticle"
+
+# --------- Thesis title (Optional - set to FALSE by default).
+# You can move the details below around as you please.
+Thesis_FP: FALSE
+# Entry1: "An unbelievable study with a title spanning multiple lines."
+# Entry2: "\\textbf{Nico Katzke}" # textbf for bold
+# Entry3: "A thesis submitted toward the degree of Doctor of Philosophy"
+# Uni_Logo: Tex/Logo.png # Place a logo in the indicated location (from your root, e.g. defaults to ~/Tex/Logo.png) and uncomment this line. Leave uncommented for no image
+# Logo_width: 0.3 # If using a logo - use this to set width (size) of image
+# Entry4: "Under the supervision of: \\vfill Prof. Joe Smith and Dr. Frank Smith"
+# Entry5: "Stellenbosch University"
+# Entry6: April 2020
+# Entry7:
+# Entry8:
+
+# --------- Front Page
+# Comment: ----- Follow this pattern for up to 5 authors
+AddTitle: TRUE # Use FALSE when submitting to peer reviewed platform. This will remove author names.
+Author1: "Harriet Catherine Laing"  # First Author - note the thanks message displayed as an italic footnote of first page.
+Ref1: "Stellenbosch University, Stellenbosch, South Africa" # First Author's Affiliation
+Email1: "21617023\\@sun.ac.za" # First Author's Email address
+
+#Author2: "John Smith"
+#Ref2: "Some other Institution, Cape Town, South Africa"
+#Email2: "John\\@gmail.com"
+#CommonAffiliation_12: TRUE # If Author 1 and 2 have a common affiliation. Works with _13, _23, etc.
+
+#Author3: "John Doe"
+#Email3: "Joe\\@gmail.com"
+
+#CorrespAuthor_1: TRUE  # If corresponding author is author 3, e.g., use CorrespAuthor_3: TRUE
+
+# Comment out below to remove both. JEL Codes only given if keywords also given.
+#keywords: "Multivariate GARCH \\sep Kalman Filter \\sep Copula" # Use \\sep to separate
+#JELCodes: "L250 \\sep L100"
+
+# ----- Manage headers and footers:
+#BottomLFooter: $Title$
+#BottomCFooter:
+#TopLHeader: \leftmark # Adds section name at topleft. Remove comment to add it.
+BottomRFooter: "\\footnotesize Page \\thepage" # Add a '#' before this line to remove footer.
+#addtoprule: TRUE
+#addfootrule: TRUE               # Use if footers added. Add '#' to remove line.
+
+# --------- page margins:
+margin: 2.3 # Sides
+bottom: 2 # bottom
+top: 2.5 # Top
+HardSet_layout: TRUE # Hard-set the spacing of words in your document. This will stop LaTeX squashing text to fit on pages, e.g.
+# This is done by hard-setting the spacing dimensions. Set to FALSE if you want LaTeX to optimize this for your paper.
+
+# --------- Line numbers
+linenumbers: FALSE # Used when submitting to journal
+
+# ---------- References settings:
+# You can download cls format here: https://www.zotero.org/ - simply search for your institution. You can also edit and save cls formats here: https://editor.citationstyles.org/about/
+# Hit download, store it in Tex/ folder, and change reference below - easy.
+bibliography: Tex/ref.bib       # Do not edit: Keep this naming convention and location.
+csl: Tex/harvard-stellenbosch-university.csl # referencing format used.
+# By default, the bibliography only displays the cited references. If you want to change this, you can comment out one of the following:
+#nocite: '@*' # Add all items in bibliography, whether cited or not
+# nocite: |  # add specific references that aren't cited
+#  @grinold2000
+#  @Someoneelse2010
+
+# ---------- General:
+#RemovePreprintSubmittedTo: TRUE  # Removes the 'preprint submitted to...' at bottom of titlepage
+#Journal: "Journal of Finance"   # Journal that the paper will be submitting to, if RemovePreprintSubmittedTo is set to TRUE.
+toc: FALSE                       # Add a table of contents
+numbersections: TRUE             # Should sections (and thus figures and tables) be numbered?
+fontsize: 11pt                  # Set fontsize
+linestretch: 1.2                # Set distance between lines.
+#link-citations: TRUE            # This creates dynamic links to the papers in reference list.
+
+### Adding additional latex packages:
+# header-includes:
+#    - \usepackage{colortbl} # Add additional packages here.
+
+output:
+  pdf_document:
+    keep_tex: TRUE
+    template: Tex/TexDefault.txt
+    fig_width: 3.5 # Adjust default figure sizes. This can also be done in the chunks of the text.
+    fig_height: 3.5
+abstract: |
+  Abstract to be written here. The abstract should not be too long and should provide the reader with a good understanding what you are writing about. Academic papers are not like novels where you keep the reader in suspense. To be effective in getting others to read your paper, be as open and concise about your findings here as possible. Ideally, upon reading your abstract, the reader should feel he / she must read your paper in entirety.
+---
+
+<!-- First: Set your default preferences for chunk options: -->
+
+<!-- If you want a chunk's code to be printed, set echo = TRUE. message = FALSE stops R printing ugly package loading details in your final paper too. I also suggest setting warning = FALSE and checking for warnings in R, else you might find ugly warnings in your paper. -->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.width = 6, fig.height = 5, fig.pos="H", fig.pos = 'H')
+# Note: Include = FALSE implies the code is executed, but not printed in your pdf.
+# warning and message = FALSE implies ugly messages and warnings are removed from your pdf.
+# These should be picked up when you execute the command chunks (code sections below) in your rmd, not printed in your paper!
+
+# Lets load in example data, and see how this can be stored and later called from your 'data' folder.
+if(!require("tidyverse")) install.packages("tidyverse")
+library(tidyverse)
+library(wordcountaddin)
+wordcountaddin::word_count("HistoryEssay.Rmd")
+
+library(readxl)
+Dataset_Loan_amounts <- read_excel("data/Dataset_Loan_amounts.xlsx")
+View(Dataset_Loan_amounts)
+
+dfLoans <- select(Dataset_Loan_amounts, Year, NumberofLoanRecipients, TotalLoanAmount) 
+dfLoansWithoutYear <- filter(dfLoans, Year!=1687)
+dfLoansWithoutYear
+
+library(graphics)
+
+library(imager)
+
+library(jpeg)
+
+# Notice that as you are working in a .Rproj file (I am assuming you are) - the relative paths of your directories start at your specified root.
+# This means that when working in a .Rproj file, you never need to use getwd() - it is assumed as your base root automatically.
+#write_rds(Dataset_Loan_amounts, path = "data/Dataset_Loan_amounts.xlsx")
+```
+
+
+<!-- ############################## -->
+<!-- # Start Writing here: -->
+<!-- ############################## -->
+
+# Introduction \label{Introduction}
+
+
+
+# Background \label{Literature}
+ 
+The Cape Colony was first established in 1652 by Jan van Riebeeck and was colonised to serve as a refreshment station for Vereenigde Oostindische Compagnie (VOC) ships. The VOC was a company that was chartered by the Dutch Republic’s State General to act on behalf of its colonized territories overseas (Fourie et al. 2012:51) and Van Riebeeck was the Commander of the VOC at this time. The Cape was colonised to address the high incidence of scurvy that the VOC sailors were prone to falling sick to while on long ship voyages between Holland and the East Indies (Fourie et al. 2012:55). The first settler population that inhabited the Cape consisted of approximately two hundred individuals. A large proportion of these first settlers were male, whereas women and children constituted only five percent of the settlers' population recorded in 1658 (Horner & Wilson, 2008:8). In the same year, slaves constituted 52 percent of the population; approximately half of which were owned by the VOC and the other half owned by freemen (Horner & Wilson, 2008:8). By 1701, the population had grown to approximately 4 500 (at least based on those involved in the Cape economy) as more European immigrants and slaves arrived in the Cape (Fourie & van Luiten, 2012).
+
+Society in the Cape Colony consisted of four main groups, namely (i) the settler population, (ii) the officials and personnel of the VOC, (iii) the Khoesan (the original inhabitants of the Cape) and (iv) slaves. The settler population consisted primarily of Dutch and German people from a variety of socio-economic backgrounds; some were affluent or "middle class" with debt burdens, and others poor and without land (Guelke, 1988:458). There was a further group included in the settler population that originated from France. These immigrants were known as Huguenots and had fled France because of the increased persecution of Protestants in their origin country (Horner & Wilson, 2008:14). 
+
+In the 1680s, many Huguenots were offered a free passage to the Cape and advances for equipment that they would upon arrival by the VOC. These inducements were provided upon the condition that the Huguenots pledged an oath of allegiance to the VOC and remain there for at least five years (Horner & Wilson, 2008:14). The Huguenots were regarded by the VOC as a potential asset to the Cape Colony, which is why they offered inducements to this group to emigrate to the Cape (Wirgman, 1895:36). However, the Commander of the VOC at this time did not regard the Huguenot's assisted emigration favourably, because his policy approach was to align the Cape Colony more closely with the Netherlands (Wirgman, 1895:36). Perhaps there was initial favoritism towards the Huguenots, that later soured into discrimination following the change in leadership's sentiment. 
+
+Slaves first arrived at the Cape in a small group in the year following 1652. In 1654, the first slaving expedition by the VOC from the Cape obtained more slaves to bring back from Madagascar (Horner & Wilson, 2008:5). Slaves were rarely allowed to become manumitted. However, slaves could have their freedom purchased if a free man wished to marry them. For example, a notable marriage through which one female slave was manumitted was between a woman called Eva and a free man called Pieter van Meerhof (Horner & Wilson, 2008:9). It is likely that she is the recorded “Eva de Hottentotin” in the data set, as it is recorded that van Meerhof predeceased Eva before 1674. Therefore, the dates align and women tended to receive loans from the church on behalf of their late husbands. 
+
+It is well-documented that the VOC provided land and loans to settlers that arrived in the Cape. For example, in 1657, the directors of the VOC mandated that nine married, settler couples from Dutch and German origin be given farmlands in an attempt to provide a steady supply of meat, grain and wine, following unsuccessful efforts in this regard by VOC slaves (Horner & Wilson, 2008:7). Generally, these first farmers in the Cape Colony were previously servants for the VOC that were manumitted. As they were previously servants, they had little resources or capital to use in their new farming ventures. Accordingly, the VOC provided some tools and cattle, however, any investments that were required in excess of these items had to come from the farmers themselves (Fourie & Von Fintel, 2009:8).
+
+It is less clear what the role of the church as a lending institution in the early Cape Colony was. It has been recorded that the church played a role in giving money to farmers in need (Fourie & Von Fintel, 2009:8). In 1665, the first formal religious institution for the Dutch Reformed Consistory was established at the Cape (Wirgman, 1895:23). The Dutch Reformed Church in Cape Town was completed in 1703 (Wirgman, 1895:31). The church addressed matters not only religious but also related to the control of government. The importance of the church was great, as the deacons of the Dutch Reformed church helped destitute individuals and orphans (Wirgman, 1895:29). It is uncertain how much wealth the church had throughout the period of interest, but in 1679 it was recorded that the church had a capital fund of 1535 British pounds available for charitable needs (Wirgman, 1895:29). However, the literature on the role of church as an economic institution in the Cape is scarce.
+
+
+#  Data \label{Data}
+
+The data set used for this research were the 17 loan books of the church in the Cape Colony spanning from 1670 to 1710, with some years missing. Each loan book detailed the name of the loan recipient, the amount of the loan, any interest accrued and a brief description thereof. This data set includes a lot of persistent entries, as there are many recurring loan recipients and loans amounts. In other words, it appears that the same people in the Cape Colony receive loans from the church year after year. However, what is less clear is whether these recurring loan recipients are receiving a similar amount from the church each year, or whether in some instances the initial amount lent is simply repaid the following year, or is accruing interest.
+
+As can be seen in Figure 1, there was a general upward trend in the total amount of loans provided by the church from 1670 until 1710. The year 1687 was omitted from this graph as it was an unusually sparse and short loan book, compared to the rest of the years in the data set, and distorted the average change over time. Similarly, the year 1687 was dropped from the number of loan recipients in Figure 2. From Figure 1, it is evidenced that the church provided more loans over time. However, as discussed in section 2, the population of the Cape Colony increased over this time period. Therefore, this graph is insufficient to implicate that the influence of the loans granted by the church increased. Albeit, it is still illustrated that the church increased it lending capacity and had the ability to provide more capital to those living in the Cape Colony in 1710 compared to 1670, an increase in excess of 70 000 gulden.
+
+```{r}
+# This is just a random plot to show you a plot. This is done if the getwd() does not point to your Template's directory.
+  # Set WD below to your project's working directory.
+
+  g1 <-
+  ggplot(data = dfLoansWithoutYear, aes(x = Year, y = TotalLoanAmount)) +
+  geom_line(color="red", size=1) +
+    ggtitle("Figure 1: Total loan amount granted by the church in the Cape Colony 1670 - 1710") +
+  theme(plot.title = element_text(size = 10)) +
+  theme(axis.title = element_text(size = 10),
+        axis.title.x = element_text()) +
+  labs(y = "Total loan amount (gulden)", x = "Year")
+g1
+```
+
+
+```{r}
+
+    g2 <-
+    ggplot(data=dfLoansWithoutYear, aes(x= Year, y= NumberofLoanRecipients))+
+    geom_line(color="blue", size=1) +
+        ggtitle("Figure 2: Loan recipients of the church in the Cape Colony 1670 - 1710") +
+    theme(plot.title = element_text(size = 10)) +
+    theme(axis.title = element_text(size = 10),
+        axis.title.x = element_text()) +
+        labs(y = "Number of loan recipients", x = "Year")
+g2
+```
+For the number of loan recipients, there is less of a steady increase over time. Figure 2 that depicts the number of individual loan recipients in this period increased substantially from 1670 until 1678. It is evident that after 1678, the number of individual loan recipients stagnated and approximately 48 recipients received loans from the church for the remainder of the period. 
+
+#  Methodology \label{Meth}
+
+The main research question was to investigate whether there was an impact of the type of loan recipient on the loan amount granted by the church. As aforementioned, the persistent nature of the data set needed to be addressed. Accordingly, the initial observation for each loan recipient was only included in the analysis of this paper. This resulted in 145 observations. By using this isolation of only initial observations, we attempt to control for the potential multi-collinearity within the data set. Moreover, we created a dummy for each year included in the data set. This was necessary because of the general upward trend in the total amount of loans granted by the church over the time period. Two years were dropped from the data set because they did not include an initial observation.
+
+To attempt to understand the effect of the type of loan recipient on the loan amount granted by the church, it was necessary to create dummy variables for the type of loan recipient. The first type identified in the data set were those with surnames that indicated slave origin, which amounted to 4 individuals. For example, those with surnames such as 'van Guinea' or 'van Bengalen' indicated that these individuals originated from countries from which slaves were obtained from. It is assumed that these individuals with slave-origin surnames were manumitted in the Cape Colony. The second type identified was women. It was rare to find women, in fact only 7 women were recorded in the data set. It was clear from a preliminary review of the data that slaves and woman received significantly less loans than Huguenots or those in the Other category type. The third type identified was the Huguenots. Using a list of Huguenot family surnames (Fourie & von Vintel, xx), these loan recipients were categorised and amounted to 12 individuals. The reference group for all individuals that did not fall into one of these three aforementioned categories were listed as Other and constituted 128 individuals. However, to investigate whether these types had an effect on the amount of the loan given by the church was determined using an ordinary least squared regression, as follows:
+
+$$
+LoanAmount = x_0 + Huguenot \beta_1 + SlaveOrigin \beta_2 + Woman \beta_3 + YearDummy \beta_i + \varepsilon
+$$
+where the dummy for year is a vector includes all the years that contain initial observations for individual loan recipients, as a coefficient to beta which is indexed by $i=4, 5, 6...$.
+
+Three regressions were run. First regression, all dummies for types and years were included to determine the effect on loan amount. The R-squared was found to be 0.218 and only the coefficients on the dummies for years 1673, 1675 and 1710. Second regression, only the year dummies. Dropped the insignificant type variables. Third regression, again included all the dummies for both years and types and then included some interaction terms too, however, still could not find type to be significant in finding an effect of loan recipient type on loan amount.
+
+#  Limitations \label{Limitations}
+
+Omitted variable bias
+
+Small sample: only 145 observations, of which
+
+As aforementioned, there are many years missing in the church loan books. It can be assumed that year on year, an omission of a singular year may not bias our results on average. However, a concern arises regarding the longer time periods for which there is no record of loans. For example, in this particular data set there are two large gaps: from 1678 to 1686 and from 1690 to 1706. The reason for concern in the case of the methodology applied in this research is that the observations included were those of the first loan recorded to a loan recipient. Accordingly, it is likely that after a long period of missing years, the following available year will be upward biased in terms of its impact on the loan amount. This can be seen in the fact that 1706 was the reference group for the year dummy.
+
+#  Discussion \label{Discussion}
+In addition to revenue generated from trading and commercial activites in addition to taxes levied on settlers in the Cape Colony (Fourie et al. 2012: 59-62), the VOC received loans from the church. However, as calculated by Fourie et al. (2012) the VOC generated approximately 50 000 gulden in the years of 1700 and 1705, so the amounts recorded in the church loan books may not have contributed much. For four years from 1670, the church loaned 992 gulden to the VOC and then in 1706, it loaned 4000 gulden. 
+
+Further research, likelihood of receiving loans again year on year for the periods in the data set without significant gaps. Perhaps there was not discrimination in the amount of the loans given, but perhaps levied more interest on freed slaves than for free burghers. 
+
+#  Conclusion \label{Conclusion}
+
+
+\newpage
+
+# References {-}
+
+Guelke, L. 1988. The Anatomy of a Colonial Settler Population: Cape Colony 1657-1750. _The International Journal of African Historical Studies, 21(3):453-473.
+
+Fourie, J., Jansen,A. & Siebrits, K. 2012. Public finances under private company rule: The Dutch Cape Colony (1652-1795).
+
+Horner, D. & Wilson, F. 2008. A Tapestry of People: The Growth of Population in the Province of the Western Cape. A Southern Africa Labour and Development Research Unit Working Paper No 21. Cape Town: SALDRU, University of Cape Town.
+
+
+Fourie, J., Jansen,A. & Siebrits, K. 2012. Public finances under private company rule: The Dutch Cape Colony (1652-1795).
+
+Fourie, J. & Von Fintel, D. 2009. The dynamics of inequality in a newly settled, pre-industrial society: The case of the Cape Colony. Stellenbosch Economic Working Papers 17. Stellenbosch University.
+
+J Fourie, “The remarkable wealth of the Dutch Cape Colony: Measurements from eighteenth-century probate
+inventories”, The Economic History Review. 66(2), 2013, pp. 419–448.
+
+?book Wirgman, A. T. 1895. The History of the Church in South Africa. p13-49. https://repository.up.ac.za/bitstream/handle/2263/12783/002_p13-49.pdf?sequence=6&isAllowed=y.
+
+<div id="refs"></div>
+
+
+# Appendix {-}
+![Alt Text](/Users/Harriet/Documents/Economic History/ESSAY/Texevier_History_Essay/HistoryEssay/data/Reg1.jpg)
+
+
