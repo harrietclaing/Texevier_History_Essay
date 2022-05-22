@@ -73,7 +73,7 @@ csl: Tex/harvard-stellenbosch-university.csl # referencing format used.
 #  @Someoneelse2010
 
 # ---------- General:
-#RemovePreprintSubmittedTo: TRUE  # Removes the 'preprint submitted to...' at bottom of titlepage
+RemovePreprintSubmittedTo: TRUE  # Removes the 'preprint submitted to...' at bottom of titlepage
 #Journal: "Journal of Finance"   # Journal that the paper will be submitting to, if RemovePreprintSubmittedTo is set to TRUE.
 toc: FALSE                       # Add a table of contents
 numbersections: TRUE             # Should sections (and thus figures and tables) be numbered?
@@ -91,8 +91,8 @@ output:
     template: Tex/TexDefault.txt
     fig_width: 3.5 # Adjust default figure sizes. This can also be done in the chunks of the text.
     fig_height: 3.5
-abstract: |
-  Abstract to be written here. The abstract should not be too long and should provide the reader with a good understanding what you are writing about. Academic papers are not like novels where you keep the reader in suspense. To be effective in getting others to read your paper, be as open and concise about your findings here as possible. Ideally, upon reading your abstract, the reader should feel he / she must read your paper in entirety.
+#abstract: |
+ # Abstract to be written here. The abstract should not be too long and should provide the reader with a good understanding what you are writing about. Academic papers are not like novels where you keep the reader in suspense. To be effective in getting others to read your paper, be as open and concise about your findings here as possible. Ideally, upon reading your abstract, the reader should feel he / she must read your paper in entirety.
 ---
 
 <!-- First: Set your default preferences for chunk options: -->
@@ -100,7 +100,7 @@ abstract: |
 <!-- If you want a chunk's code to be printed, set echo = TRUE. message = FALSE stops R printing ugly package loading details in your final paper too. I also suggest setting warning = FALSE and checking for warnings in R, else you might find ugly warnings in your paper. -->
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.width = 6, fig.height = 5, fig.pos="H", fig.pos = 'H')
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.width = 4, fig.height = 3, fig.align='center', fig.pos="H", fig.pos = 'H')
 # Note: Include = FALSE implies the code is executed, but not printed in your pdf.
 # warning and message = FALSE implies ugly messages and warnings are removed from your pdf.
 # These should be picked up when you execute the command chunks (code sections below) in your rmd, not printed in your paper!
@@ -137,28 +137,26 @@ library(jpeg)
 
 # Introduction \label{Introduction}
 
+Upon the arrival of the first Dutch settlers in the Cape, came the establishment of religious institutions that impacted the economy. The Cape Colony was first established in 1652 by Jan van Riebeeck to serve as a refreshment station for Vereenigde Oostindische Compagnie (VOC) ships. In order to fulfill the objective of the VOC to provide fresh produce to passing ships, the VOC provided land and loans new settlers. The church also provided loans in the early years of the Cape Colony. The role of the church as a lending institution is not well understood. However, this paper begins to determine the influence of church loans for individual loan recipients in the Cape Colony at a time when the first settlers were beginning to establish farming ventures and their new lives in the Cape. 
 
+Society in the Cape Colony was heterogenous in terms of the origins of the settlers, as well as their slaves, and their wealth. This paper sought to determine whether there is an effect of the type of individual loan recipients on the loan amount that the church granted. Section 2 provides brief background on the establishment of the Cape Colony, the different groups within the society during this time period, and outlines the role of the church in the literature. Section 3 presents the data set used in this paper's analysis and section 4 explains the methodology applied to answer the main research question. Section 5 provides the limitations of this paper and, lastly, section 6 concludes.
 
 # Background \label{Literature}
  
-The Cape Colony was first established in 1652 by Jan van Riebeeck and was colonised to serve as a refreshment station for Vereenigde Oostindische Compagnie (VOC) ships. The VOC was a company that was chartered by the Dutch Republic’s State General to act on behalf of its colonized territories overseas (Fourie et al. 2012:51) and Van Riebeeck was the Commander of the VOC at this time. The Cape was colonised to address the high incidence of scurvy that the VOC sailors were prone to falling sick to while on long ship voyages between Holland and the East Indies (Fourie et al. 2012:55). The first settler population that inhabited the Cape consisted of approximately two hundred individuals. A large proportion of these first settlers were male, whereas women and children constituted only five percent of the settlers' population recorded in 1658 (Horner & Wilson, 2008:8). In the same year, slaves constituted 52 percent of the population; approximately half of which were owned by the VOC and the other half owned by freemen (Horner & Wilson, 2008:8). By 1701, the population had grown to approximately 4 500 (at least based on those involved in the Cape economy) as more European immigrants and slaves arrived in the Cape (Fourie & van Luiten, 2012).
+The VOC was a company that was chartered by the Dutch Republic’s State General to act on behalf of its colonised territories overseas (Fourie _et al_. 2012:51). The Cape was colonised to address the high incidence of scurvy that the VOC sailors were prone to falling sick to, while on long ship voyages between Holland and the East Indies (Fourie _et al_. 2012:55). The first settler population that inhabited the Cape consisted of approximately two hundred individuals. A large proportion of these first settlers were male, whereas women and children constituted only five percent of the settlers' population recorded in 1658 (Horner & Wilson, 2008:8). In the same year, slaves constituted 52 percent of the population; approximately half of which were owned by the VOC and the other half owned by freemen (Horner & Wilson, 2008:8). By 1701, the population had grown to approximately 4 500 (at least based on those involved in the Cape economy) as more European immigrants and slaves arrived in the Cape (Fourie & Luiten van Zanden, 2012).
 
-Society in the Cape Colony consisted of four main groups, namely (i) the settler population, (ii) the officials and personnel of the VOC, (iii) the Khoesan (the original inhabitants of the Cape) and (iv) slaves. The settler population consisted primarily of Dutch and German people from a variety of socio-economic backgrounds; some were affluent or "middle class" with debt burdens, and others poor and without land (Guelke, 1988:458). There was a further group included in the settler population that originated from France. These immigrants were known as Huguenots and had fled France because of the increased persecution of Protestants in their origin country (Horner & Wilson, 2008:14). 
-
-In the 1680s, many Huguenots were offered a free passage to the Cape and advances for equipment that they would upon arrival by the VOC. These inducements were provided upon the condition that the Huguenots pledged an oath of allegiance to the VOC and remain there for at least five years (Horner & Wilson, 2008:14). The Huguenots were regarded by the VOC as a potential asset to the Cape Colony, which is why they offered inducements to this group to emigrate to the Cape (Wirgman, 1895:36). However, the Commander of the VOC at this time did not regard the Huguenot's assisted emigration favourably, because his policy approach was to align the Cape Colony more closely with the Netherlands (Wirgman, 1895:36). Perhaps there was initial favoritism towards the Huguenots, that later soured into discrimination following the change in leadership's sentiment. 
+Society in the Cape Colony consisted of four main groups, namely (i) the settler population, (ii) the VOC officials and employees, (iii) the Khoesan (the original inhabitants of the Cape) and (iv) slaves. The settler population consisted primarily of Dutch and German people from a variety of socio-economic backgrounds; some were affluent or "middle class" with debt burdens, and others poor and without land (Guelke, 1988:458). There was a further group included in the settler population that originated from France. These immigrants were known as Huguenots and had fled because of the increased persecution of Protestants in their origin country (Horner & Wilson, 2008:14). In the 1680s, many Huguenots were offered a free passage to the Cape and advances for equipment that they would use upon arrival by the VOC. These inducements were provided upon the condition that the Huguenots pledged an oath of allegiance to the VOC and remain there for at least five years (Horner & Wilson, 2008:14). The Huguenots were regarded by the VOC as a potential asset to the Cape Colony, which is why they offered inducements to this group to emigrate to the Cape (Wirgman, 1895:36).
 
 Slaves first arrived at the Cape in a small group in the year following 1652. In 1654, the first slaving expedition by the VOC from the Cape obtained more slaves to bring back from Madagascar (Horner & Wilson, 2008:5). Slaves were rarely allowed to become manumitted. However, slaves could have their freedom purchased if a free man wished to marry them. For example, a notable marriage through which one female slave was manumitted was between a woman called Eva and a free man called Pieter van Meerhof (Horner & Wilson, 2008:9). It is likely that she is the recorded “Eva de Hottentotin” in the data set, as it is recorded that van Meerhof predeceased Eva before 1674. Therefore, the dates align and women tended to receive loans from the church on behalf of their late husbands. 
 
 It is well-documented that the VOC provided land and loans to settlers that arrived in the Cape. For example, in 1657, the directors of the VOC mandated that nine married, settler couples from Dutch and German origin be given farmlands in an attempt to provide a steady supply of meat, grain and wine, following unsuccessful efforts in this regard by VOC slaves (Horner & Wilson, 2008:7). Generally, these first farmers in the Cape Colony were previously servants for the VOC that were manumitted. As they were previously servants, they had little resources or capital to use in their new farming ventures. Accordingly, the VOC provided some tools and cattle, however, any investments that were required in excess of these items had to come from the farmers themselves (Fourie & Von Fintel, 2009:8).
 
-It is less clear what the role of the church as a lending institution in the early Cape Colony was. It has been recorded that the church played a role in giving money to farmers in need (Fourie & Von Fintel, 2009:8). In 1665, the first formal religious institution for the Dutch Reformed Consistory was established at the Cape (Wirgman, 1895:23). The Dutch Reformed Church in Cape Town was completed in 1703 (Wirgman, 1895:31). The church addressed matters not only religious but also related to the control of government. The importance of the church was great, as the deacons of the Dutch Reformed church helped destitute individuals and orphans (Wirgman, 1895:29). It is uncertain how much wealth the church had throughout the period of interest, but in 1679 it was recorded that the church had a capital fund of 1535 British pounds available for charitable needs (Wirgman, 1895:29). However, the literature on the role of church as an economic institution in the Cape is scarce.
+It is less clear how the church served as a lending institution in the early Cape Colony. It has been recorded that the church played a role in giving money to farmers in need (Fourie & Von Fintel, 2009:8). In 1665, the first formal religious institution for the Dutch Reformed Consistory was established at the Cape (Wirgman, 1895:23) and the Dutch Reformed Church in Cape Town was completed in 1703 (Wirgman, 1895:31). The church addressed matters that were notnot only religious but also related to the control of government. The church was documented to assist needy individuals financially, as the deacons of the Dutch Reformed church helped destitute individuals and orphans (Wirgman, 1895:29). It is uncertain how much wealth the church had throughout the period of interest, but in 1679 it was recorded that the church had a capital fund of 1535 British pounds available for charitable needs (Wirgman, 1895:29). However, the literature on the role of church as an economic institution to provide loans for farmers and those in need of capital for commercial ventures in the Cape is scarce.
 
 
 #  Data \label{Data}
 
-The data set used for this research were the 17 loan books of the church in the Cape Colony spanning from 1670 to 1710, with some years missing. Each loan book detailed the name of the loan recipient, the amount of the loan, any interest accrued and a brief description thereof. This data set includes a lot of persistent entries, as there are many recurring loan recipients and loans amounts. In other words, it appears that the same people in the Cape Colony receive loans from the church year after year. However, what is less clear is whether these recurring loan recipients are receiving a similar amount from the church each year, or whether in some instances the initial amount lent is simply repaid the following year, or is accruing interest.
-
-As can be seen in Figure 1, there was a general upward trend in the total amount of loans provided by the church from 1670 until 1710. The year 1687 was omitted from this graph as it was an unusually sparse and short loan book, compared to the rest of the years in the data set, and distorted the average change over time. Similarly, the year 1687 was dropped from the number of loan recipients in Figure 2. From Figure 1, it is evidenced that the church provided more loans over time. However, as discussed in section 2, the population of the Cape Colony increased over this time period. Therefore, this graph is insufficient to implicate that the influence of the loans granted by the church increased. Albeit, it is still illustrated that the church increased it lending capacity and had the ability to provide more capital to those living in the Cape Colony in 1710 compared to 1670, an increase in excess of 70 000 gulden.
+The data set used for this research were the 17 loan books of the church in the Cape Colony spanning from 1670 to 1710, with some years missing. Each loan book detailed the name of the loan recipient, the amount of the loan (in gulden which was the currency used during this time period), any interest accrued and a brief description thereof. This data set includes a lot of persistent entries, as there are many recurring loan recipients and loans amounts. In other words, it appears that the same people in the Cape Colony receive loans from the church year after year. However, what is less clear is whether these recurring loan recipients are receiving a similar amount from the church each year, or whether in some instances the initial amount that is loaned is simply repaid the following year, or is simply accruing interest.
 
 ```{r}
 # This is just a random plot to show you a plot. This is done if the getwd() does not point to your Template's directory.
@@ -167,7 +165,7 @@ As can be seen in Figure 1, there was a general upward trend in the total amount
   g1 <-
   ggplot(data = dfLoansWithoutYear, aes(x = Year, y = TotalLoanAmount)) +
   geom_line(color="red", size=1) +
-    ggtitle("Figure 1: Total loan amount granted by the church in the Cape Colony 1670 - 1710") +
+    ggtitle("Figure 1: Total loan amount granted by the church in \nthe Cape Colony 1670 - 1710") +
   theme(plot.title = element_text(size = 10)) +
   theme(axis.title = element_text(size = 10),
         axis.title.x = element_text()) +
@@ -175,74 +173,89 @@ As can be seen in Figure 1, there was a general upward trend in the total amount
 g1
 ```
 
+As can be seen in Figure 1, there was a general upward trend in the total amount of loans provided by the church from 1670 until 1710. The year 1687 was omitted from this graph as it was an unusually short loan book, compared to the rest of the years in the data set, and distorted the average change over time. Similarly, the year 1687 was dropped from the number of loan recipients in Figure 2. From Figure 1, it is evidenced that the church provided more loans over time. However, as discussed in section 2, the population of the Cape Colony increased over this time period, and there may have been inflationary pressures. Therefore, this graph is insufficient to implicate that the influence of the loans granted by the church increased over time. 
+
+Nevertheless, it is illustrated that the church increased its lending capacity and had the ability to provide more capital to those living in the Cape Colony in 1710 compared to 1670, an increase in excess of 70 000 gulden. As calculated by Fourie et al. (2012) the VOC generated approximately 50 000 gulden in the years of 1700 and 1705 from their trading and commercial activities. For four years from 1670, the church loaned 992 gulden to the VOC each year and then in 1706, the church loaned the VOC 4000 gulden. The amounts recorded in the church loan books may not have contributed much to the VOC itself, relative to its revenue. However, it appears that the church and the VOC had close links and that the church had significant wealth to lend.
 
 ```{r}
 
     g2 <-
     ggplot(data=dfLoansWithoutYear, aes(x= Year, y= NumberofLoanRecipients))+
     geom_line(color="blue", size=1) +
-        ggtitle("Figure 2: Loan recipients of the church in the Cape Colony 1670 - 1710") +
+        ggtitle("Figure 2: Loan recipients of the church in the Cape \nColony 1670 - 1710") +
     theme(plot.title = element_text(size = 10)) +
     theme(axis.title = element_text(size = 10),
         axis.title.x = element_text()) +
         labs(y = "Number of loan recipients", x = "Year")
 g2
 ```
-For the number of loan recipients, there is less of a steady increase over time. Figure 2 that depicts the number of individual loan recipients in this period increased substantially from 1670 until 1678. It is evident that after 1678, the number of individual loan recipients stagnated and approximately 48 recipients received loans from the church for the remainder of the period. 
+For the number of loan recipients, there is less of a steady increase over time. Figure 2 depicts that the number of individual loan recipients in this period increased substantially from 1670 until 1678. It is evident that after 1678, the number of individual loan recipients stagnated and approximately 48 recipients received loans from the church for the remainder of the period and the value only marginally fluctuated around this level. 
 
 #  Methodology \label{Meth}
 
-The main research question was to investigate whether there was an impact of the type of loan recipient on the loan amount granted by the church. As aforementioned, the persistent nature of the data set needed to be addressed. Accordingly, the initial observation for each loan recipient was only included in the analysis of this paper. This resulted in 145 observations. By using this isolation of only initial observations, we attempt to control for the potential multi-collinearity within the data set. Moreover, we created a dummy for each year included in the data set. This was necessary because of the general upward trend in the total amount of loans granted by the church over the time period. Two years were dropped from the data set because they did not include an initial observation.
+The main research question was to investigate whether there was an impact of the type of loan recipient on the loan amount granted by the church. We test the hypothesis that women and manumitted slaves were likely given smaller loans than others, and Huguenots given greater loans as they were deemed as beneficial to be a part of Cape Colony society, which is why the VOC provided inducements to this group of settlers. To address the aforementioned persistence in the data set, only the initial observation for each unique loan recipient was included in the analysis of this paper. This resulted in 144 observations. By dropping any second observations for a loan recipient, we attempt to control for the potential multi-collinearity within the data set. Moreover, we created a dummy for each year included in the data set. This was necessary because of the general upward trend in the total amount of loans granted by the church over the time period, as seen in Figure 1. 
 
-To attempt to understand the effect of the type of loan recipient on the loan amount granted by the church, it was necessary to create dummy variables for the type of loan recipient. The first type identified in the data set were those with surnames that indicated slave origin, which amounted to 4 individuals. For example, those with surnames such as 'van Guinea' or 'van Bengalen' indicated that these individuals originated from countries from which slaves were obtained from. It is assumed that these individuals with slave-origin surnames were manumitted in the Cape Colony. The second type identified was women. It was rare to find women, in fact only 7 women were recorded in the data set. It was clear from a preliminary review of the data that slaves and woman received significantly less loans than Huguenots or those in the Other category type. The third type identified was the Huguenots. Using a list of Huguenot family surnames (Fourie & von Vintel, xx), these loan recipients were categorised and amounted to 12 individuals. The reference group for all individuals that did not fall into one of these three aforementioned categories were listed as Other and constituted 128 individuals. However, to investigate whether these types had an effect on the amount of the loan given by the church was determined using an ordinary least squared regression, as follows:
-
+To understand the effect of the type of loan recipient on the loan amount granted by the church, it was necessary to create dummy variables for the type of loan recipient. The first type identified in the data set were those with surnames that indicated slave origin, which amounted to 4 individuals. For example, those with surnames such as 'van Guinea' or 'van Bengalen' indicated that these individuals originated from countries from which slaves were obtained from. It is assumed that these individuals with slave-origin surnames were manumitted in the Cape Colony. The second type identified was women. It was rare to find women in the data set as only 7 women were recorded in the data set, and often only appeared once. The third type identified was the Huguenots. Using a list of Huguenot family surnames (Fourie & von Vintel, 2009), these loan recipients were categorised and amounted to 12 individuals. The reference group for all individuals that did not fall into one of these three aforementioned categories were listed as Other and constituted 128 individuals. It was clear from a preliminary review of the data that slaves and woman received significantly less loans than Huguenots or those in the Other category type, in terms of quantity.  However, to investigate whether these types had an effect on the amount of the loan given by the church was determined using an ordinary least squared regression, as follows:
 $$
 LoanAmount = x_0 + Huguenot \beta_1 + SlaveOrigin \beta_2 + Woman \beta_3 + YearDummy \beta_i + \varepsilon
 $$
-where the dummy for year is a vector includes all the years that contain initial observations for individual loan recipients, as a coefficient to beta which is indexed by $i=4, 5, 6...$.
+where the dummy for year is a vector including all the years that contain initial observations for individual loan recipients, as a coefficient to beta which is indexed by $i=4, 5, 6...$.
 
-Three regressions were run. First regression, all dummies for types and years were included to determine the effect on loan amount. The R-squared was found to be 0.218 and only the coefficients on the dummies for years 1673, 1675 and 1710. Second regression, only the year dummies. Dropped the insignificant type variables. Third regression, again included all the dummies for both years and types and then included some interaction terms too, however, still could not find type to be significant in finding an effect of loan recipient type on loan amount.
+According to the equation above, a regression was run on all dummies for both types and years to determine whether there is an effect on loan amount. Subsequently, two further regressions were run to test the robustness of the results. A second regression was run in which the type dummies were dropped and a final third regression was run to include both the year and type dummies in addition to some interaction terms.  
+
+#  Results and discussion \label{Discussion}
+
+In the first regression, the results were that only the coefficients on the dummies for years 1673, 1675 and 1710 were statistically significant. The R-squared was found to be 0.218 and the intercept, which represents the reference group for the 'other' type in 1706, had a coefficient of 659.011. Therefore, if an 'other' loan recipient received a loan in 1673, it is estimated to be 264.063 guldens less than the reference group. It is interesting to note that the coefficient on the year 1675 is smaller than for 1673, which is counter-intuitive to the general upward trend demonstrated in Figure 1.  Lastly, there was a significant and large, positive effect of receiving a loan from the church in 1710.
+
+In the second regression, only the year dummies were included. This caused the R-squared to decrease to 0.205, which may indicate that by dropping the type dummies, some explanatory information has been lost. However, it is likely because R-squared may be increased simply by adding parameters, albeit even if they are insignificant parameters. The years 1708 and 1710 were found to be significant and positive. Lastly, in the third regression, the inclusion of some interaction terms did increase the R-squared, but it is likely driven by the aforementioned parameter effect. The coefficient on the type dummies were still found to be insignificant for the effect of loan recipient type on loan amount when interacted with year dummies. 
+
+It is an unexpected result to find that woman and those of slave origin were found to have no negative effect on the loan amount received from the church, albeit that it there were only few individual loan recipients who were categorised into these two groups from the data set. The fact that woman only appeared to receive loans on behalf of their late husbands can explain why they did not receive lower loan amounts than men. This demonstrates that the church simply granted loans of the same value to the late husbands' family in his absence.
+
+The null effect of slaves on loan amounts is likely reflective of the new regulations enacted in 1685 in the Cape Colony by the Governor-General van Drakenstein, who was a colonial administrator for the VOC. It was decided that those slaves who had been manumitted had become burdensome in terms of the church's funds. Thereby, these new regulations specified that only those slaves deemed to be 'well-conducted' may be allowed to become manumitted (Wirgman, 1895:33). Therefore, those who were previously slaves in the Cape Colony after 1685 were deemed to be respectable and were likely treated as such in society, and by extension the church did not unduly discriminate against them in the amount of loans granted to these individuals.
+
+With regards to the Huguenot type, as aforementioned in section 2, the Huguenots were initially seen as an asset to the Cape Colony. However, the Commander of the VOC in the 1680s did not regard the Huguenot's assisted emigration favourably, because his policy approach was to align the Cape Colony more closely with the Netherlands (Wirgman, 1895:36). Perhaps there was initial favoritism towards the Huguenots, that later soured into discrimination following the change in leadership's sentiment, thereby negating any advantage they may have gained from the church in terms of loan amounts.
 
 #  Limitations \label{Limitations}
 
-Omitted variable bias
+One limitation of this paper is that the sample of different loan recipients is relatively small, as only 144 unique loan recipient observations were recorded. In an attempt to remove multi-collinearity between years, the sample was made smaller which reduced potential variation in the data set. Due to the lack of information about each loan recipient included in the church loan books, a further limitation of this paper's analysis is omitted variable bias. The reference dummy category for those who fell into the 'other' loan recipient type likely included further variation that was otherwise difficult to further specify. Despite searching each loan recipients' full name on genealogy websites, there was very little information about what may have distinguished this category. Therefore, if there is some further categorisation within the 'other' type that may have had an effect on the loan amount, the results may be biased.
 
-Small sample: only 145 observations, of which
+As aforementioned, there are many years missing in the church loan books. It can be assumed that year on year, an omission of a singular year may not bias our results on average. However, a concern arises regarding the longer time periods for which there is no record of loans. For example, in this particular data set there are two large gaps: from 1678 to 1686 and from 1690 to 1706. The reason for concern in the case of the methodology applied in this research is that the observations included were only the first loan recorded to a unique loan recipient. Accordingly, it is likely that after a long period of missing years, the following available year will be upward biased in terms of its impact on the loan amount. This can be seen in the fact that 1706 was the reference group for the year dummy, indicating it was the group with the highest frequency of observations.
 
-As aforementioned, there are many years missing in the church loan books. It can be assumed that year on year, an omission of a singular year may not bias our results on average. However, a concern arises regarding the longer time periods for which there is no record of loans. For example, in this particular data set there are two large gaps: from 1678 to 1686 and from 1690 to 1706. The reason for concern in the case of the methodology applied in this research is that the observations included were those of the first loan recorded to a loan recipient. Accordingly, it is likely that after a long period of missing years, the following available year will be upward biased in terms of its impact on the loan amount. This can be seen in the fact that 1706 was the reference group for the year dummy.
+Lastly, there is a selection issue in this paper, as only those who received loans from the church were included in the sample. Those who were denied loans from the church were not reflected. This may partly explain why we see no effect of the type of loan recipients in the analysis because there may have been a selection by the church to only provide loans to those they deemed to be needy or respectable within society. However, the data on those who were not granted loans from the church does not exist so this analysis made use of the available data to achieve results for those who were granted loans in the first instance.
 
-#  Discussion \label{Discussion}
-In addition to revenue generated from trading and commercial activites in addition to taxes levied on settlers in the Cape Colony (Fourie et al. 2012: 59-62), the VOC received loans from the church. However, as calculated by Fourie et al. (2012) the VOC generated approximately 50 000 gulden in the years of 1700 and 1705, so the amounts recorded in the church loan books may not have contributed much. For four years from 1670, the church loaned 992 gulden to the VOC and then in 1706, it loaned 4000 gulden. 
-
-Further research, likelihood of receiving loans again year on year for the periods in the data set without significant gaps. Perhaps there was not discrimination in the amount of the loans given, but perhaps levied more interest on freed slaves than for free burghers. 
+\newpage
 
 #  Conclusion \label{Conclusion}
 
+To conclude, this paper finds that there was no impact of the type of loan recipient on the loan amount granted by the church in the Cape Colony during the period 1670 to 1710. The results found contradict our preliminary hypothesis that there would be smaller loans granted to woman and manumitted slaves and larger loans granted to Huguenots on average, compared to those not included in these groups. It is suggested that women who received loans from the church were not granted smaller loans because they received the same loan amounts on behalf of their late husbands the in years following their husbands death. On the other hand, the reason for manumitted slaves receiving similar loan amounts compared to other loan recipients is likely related to the requirements for manumitted slaves to be deemed as 'respectable' in society before they were freed. Therefore, any discrimination by the church and the VOC may be mitigated against this requirement. Lastly, the Huguenots were likely not granted larger loans because they were given favourable inducements by the VOC to migrate before arrival in the Cape. As a result, the Commander of the VOC at the time may not have wanted to advantage this group further because they were not Dutch and he wished the Colony to be further aligned with the Netherlands. It is suggested that for further research, the likelihood of receiving more loans year-on-year for subsequent periods in the data set (for years without significant gaps) be investigated. Alternatively, potential discrimination by the church may not have manifested in the amount of the loans given, but rather in higher interest levied on freed slaves than for free men. 
 
 \newpage
 
 # References {-}
 
-Guelke, L. 1988. The Anatomy of a Colonial Settler Population: Cape Colony 1657-1750. _The International Journal of African Historical Studies, 21(3):453-473.
+Fourie, J. & Von Fintel, D. 2009. The dynamics of inequality in a newly settled, pre-industrial society: The case of the Cape Colony. Stellenbosch Economic Working Papers 17. Stellenbosch University.
 
-Fourie, J., Jansen,A. & Siebrits, K. 2012. Public finances under private company rule: The Dutch Cape Colony (1652-1795).
+Fourie, J., Jansen, A. & Siebrits, K. 2012. Public finances under private company rule: The Dutch Cape Colony (1652-1795). New Contree, 68:51-71.
+
+Fourie, J. & Luiten van Zanden, J. 2012. GDP in the Dutch Cape Colony: The national accounts of a slave-based society. Working Paper No. 4, Stellenbosch University, Department of Economics.
+
+Fourie, J. 2013. The remarkable wealth of the Dutch Cape Colony: Measurements from eighteenth-century probate inventories. _The Economic History Review_, 66(2):419–448.
+
+Guelke, L. 1988. The Anatomy of a Colonial Settler Population: Cape Colony 1657-1750. _The International Journal of African Historical Studies, 21(3):453-473.
 
 Horner, D. & Wilson, F. 2008. A Tapestry of People: The Growth of Population in the Province of the Western Cape. A Southern Africa Labour and Development Research Unit Working Paper No 21. Cape Town: SALDRU, University of Cape Town.
 
-
-Fourie, J., Jansen,A. & Siebrits, K. 2012. Public finances under private company rule: The Dutch Cape Colony (1652-1795).
-
-Fourie, J. & Von Fintel, D. 2009. The dynamics of inequality in a newly settled, pre-industrial society: The case of the Cape Colony. Stellenbosch Economic Working Papers 17. Stellenbosch University.
-
-J Fourie, “The remarkable wealth of the Dutch Cape Colony: Measurements from eighteenth-century probate
-inventories”, The Economic History Review. 66(2), 2013, pp. 419–448.
-
-?book Wirgman, A. T. 1895. The History of the Church in South Africa. p13-49. https://repository.up.ac.za/bitstream/handle/2263/12783/002_p13-49.pdf?sequence=6&isAllowed=y.
-
-<div id="refs"></div>
+Wirgman, A. T. 1895. The History of the Church in South Africa [Online]. https://repository.up.ac.za/bitstream/handle/2263/12783/002_p13-49.pdf?sequence=6&isAllowed=y [2022, May 19].
 
 
 # Appendix {-}
-![Alt Text](/Users/Harriet/Documents/Economic History/ESSAY/Texevier_History_Essay/HistoryEssay/data/Reg1.jpg)
 
+# Regression 1 {-}
+![Alt Text](/Users/Harriet/Documents/Economic History/ESSAY/Texevier_History_Essay/HistoryEssay/data/Reg1.jpg)
+\newpage
+
+# Regression 2 {-}
+![Alt Text](/Users/Harriet/Documents/Economic History/ESSAY/Texevier_History_Essay/HistoryEssay/data/REg2.jpg)
+\newpage
+![Alt Text](/Users/Harriet/Documents/Economic History/ESSAY/Texevier_History_Essay/HistoryEssay/data/Reg3.jpg)
 
